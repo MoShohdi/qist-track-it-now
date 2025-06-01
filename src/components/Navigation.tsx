@@ -39,6 +39,7 @@ export const Navigation = () => {
         <Button 
           size="sm" 
           className="bg-teal-600 hover:bg-teal-700 rounded-full p-3 relative -top-2 shadow-lg"
+          onClick={() => navigate('/add-item')}
         >
           <Plus className="h-6 w-6" />
         </Button>

@@ -1,15 +1,18 @@
 
-import { useState } from "react";
-import { Plus, Bell, User, CreditCard, Calendar, TrendingUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Bell, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { InstallmentCard } from "@/components/InstallmentCard";
+import { SwipeableInstallmentCard } from "@/components/SwipeableInstallmentCard";
 import { EmptyState } from "@/components/EmptyState";
 import { SummaryCards } from "@/components/SummaryCards";
 import { Navigation } from "@/components/Navigation";
+import { Onboarding } from "@/components/Onboarding";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [installments, setInstallments] = useState([
     {
       id: 1,
@@ -52,6 +55,19 @@ const Index = () => {
     }
   ]);
 
+  // Check if user is new (in real app, this would check local storage or user profile)
+  useEffect(() => {
+    const hasSeenOnboarding = localStorage.getItem('qist_onboarding_completed');
+    if (!hasSeenOnboarding) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem('qist_onboarding_completed', 'true');
+    setShowOnboarding(false);
+  };
+
   const totalMonthlyPayment = installments.reduce((sum, item) => sum + item.monthlyPayment, 0);
   const totalOutstanding = installments.reduce((sum, item) => sum + (item.totalAmount - item.paidAmount), 0);
   const overdueCount = installments.filter(item => item.isOverdue).length;
@@ -74,6 +90,15 @@ const Index = () => {
     );
   };
 
+  const handleAddItem = () => {
+    navigate('/add-item');
+  };
+
+  // Show onboarding if user is new
+  if (showOnboarding) {
+    return <Onboarding onComplete={handleOnboardingComplete} />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 to-white">
       {/* Header */}
@@ -92,7 +117,7 @@ const Index = () => {
                 </Badge>
               )}
             </Button>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
               <User className="h-5 w-5 text-teal-700" />
             </Button>
           </div>
@@ -112,7 +137,7 @@ const Index = () => {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-teal-900">Your Installments</h2>
-            <Button size="sm" className="bg-teal-600 hover:bg-teal-700">
+            <Button size="sm" className="bg-teal-600 hover:bg-teal-700" onClick={handleAddItem}>
               <Plus className="h-4 w-4 mr-1" />
               Add Item
             </Button>
@@ -120,8 +145,11 @@ const Index = () => {
 
           {installments.length > 0 ? (
             <div className="space-y-3">
+              <p className="text-sm text-gray-600 mb-4">
+                💡 Tip: Swipe left to mark as paid, swipe right to view details
+              </p>
               {installments.map((installment) => (
-                <InstallmentCard 
+                <SwipeableInstallmentCard 
                   key={installment.id}
                   installment={installment}
                   onMarkAsPaid={handleMarkAsPaid}

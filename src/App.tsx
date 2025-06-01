@@ -11,6 +11,7 @@ import Calendar from "./pages/Calendar";
 import Analytics from "./pages/Analytics";
 import Profile from "./pages/Profile";
 import InstallmentDetails from "./pages/InstallmentDetails";
+import AddItem from "./pages/AddItem";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/add-item" element={<AddItem />} />
             <Route path="/installment/:id" element={<InstallmentDetails />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

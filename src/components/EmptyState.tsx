@@ -2,8 +2,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, CreditCard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const EmptyState = () => {
+  const navigate = useNavigate();
+
   return (
     <Card className="border-teal-200 border-dashed">
       <CardContent className="p-8 text-center">
@@ -14,7 +17,7 @@ export const EmptyState = () => {
         <p className="text-gray-600 mb-6 max-w-sm mx-auto">
           Start tracking your installment payments by adding your first item. Stay organized and never miss a payment!
         </p>
-        <Button className="bg-teal-600 hover:bg-teal-700">
+        <Button className="bg-teal-600 hover:bg-teal-700" onClick={() => navigate('/add-item')}>
           <Plus className="h-4 w-4 mr-2" />
           Add Your First Item
         </Button>
