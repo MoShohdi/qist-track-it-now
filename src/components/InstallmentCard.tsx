@@ -2,8 +2,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Check, Clock, AlertTriangle, Store } from "lucide-react";
+import { SegmentedProgress } from "./SegmentedProgress";
 
 interface Installment {
   id: number;
@@ -35,7 +35,6 @@ export const InstallmentCard = ({ installment, onMarkAsPaid }: InstallmentCardPr
     }).format(amount);
   };
 
-  const progressPercentage = (installment.paidInstallments / installment.totalInstallments) * 100;
   const isCompleted = installment.paidInstallments === installment.totalInstallments;
 
   const getStatusBadge = () => {
@@ -76,9 +75,12 @@ export const InstallmentCard = ({ installment, onMarkAsPaid }: InstallmentCardPr
         <div className="mb-4">
           <div className="flex justify-between text-sm text-gray-600 mb-2">
             <span>{installment.paidInstallments} of {installment.totalInstallments} paid</span>
-            <span>{Math.round(progressPercentage)}%</span>
           </div>
-          <Progress value={progressPercentage} className="h-2" />
+          <SegmentedProgress 
+            current={installment.paidInstallments} 
+            total={installment.totalInstallments} 
+            className="mb-2"
+          />
         </div>
 
         {/* Payment Info */}
