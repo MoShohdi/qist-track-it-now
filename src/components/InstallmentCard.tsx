@@ -1,4 +1,5 @@
 
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,8 @@ interface InstallmentCardProps {
 }
 
 export const InstallmentCard = ({ installment, onMarkAsPaid }: InstallmentCardProps) => {
+  const navigate = useNavigate();
+  
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ar-EG', {
       style: 'currency',
@@ -53,11 +56,23 @@ export const InstallmentCard = ({ installment, onMarkAsPaid }: InstallmentCardPr
     </Badge>;
   };
 
+  const handleCardClick = () => {
+    navigate(`/installment/${installment.id}`);
+  };
+
+  const handleMarkAsPaidClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when button is clicked
+    onMarkAsPaid(installment.id);
+  };
+
   return (
-    <Card className={`transition-all hover:shadow-md ${
-      installment.isOverdue ? 'border-red-200 bg-red-50' : 
-      isCompleted ? 'border-green-200 bg-green-50' : 'border-teal-200'
-    }`}>
+    <Card 
+      className={`transition-all hover:shadow-md cursor-pointer ${
+        installment.isOverdue ? 'border-red-200 bg-red-50' : 
+        isCompleted ? 'border-green-200 bg-green-50' : 'border-teal-200'
+      }`}
+      onClick={handleCardClick}
+    >
       <CardContent className="p-4">
         {/* Header */}
         <div className="flex items-start justify-between mb-3">
@@ -100,7 +115,7 @@ export const InstallmentCard = ({ installment, onMarkAsPaid }: InstallmentCardPr
         {/* Action Button */}
         {!isCompleted && (
           <Button 
-            onClick={() => onMarkAsPaid(installment.id)}
+            onClick={handleMarkAsPaidClick}
             className="w-full bg-teal-600 hover:bg-teal-700"
             size="sm"
           >
