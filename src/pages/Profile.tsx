@@ -23,7 +23,7 @@ const Profile = () => {
     joinDate: "March 2025"
   };
 
-  const handleLanguageChange = (newLanguage: string) => {
+  const handleLanguageChange = (newLanguage: 'en' | 'ar') => {
     setLanguage(newLanguage);
   };
 
