@@ -1,24 +1,54 @@
-# Welcome to your Lovable project
+# Qist Track It Now - Mobile App
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/ddc351db-236d-4a4b-9fd1-d923ad1e5126
+Qist Track It Now is a mobile application for tracking installment payments and financial planning. Built using React Native with Expo, this app provides a seamless experience for managing your installment payments and financial goals.
 
-## How can I edit this code?
+## Project Info
 
-There are several ways of editing your application.
+**Lovable Project**: https://lovable.dev/projects/ddc351db-236d-4a4b-9fd1-d923ad1e5126
+
+## Development Setup
+
+### Prerequisites
+- Node.js & npm
+- Expo CLI
+- React Native CLI
+- Git
+
+### Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+### Development Tools
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ddc351db-236d-4a4b-9fd1-d923ad1e5126) and start prompting.
+Continue using Lovable for development at [Lovable Project](https://lovable.dev/projects/ddc351db-236d-4a4b-9fd1-d923ad1e5126). Changes made via Lovable will be automatically reflected in the mobile app.
 
-Changes made via Lovable will be committed automatically to this repo.
+**Local Development**
 
-**Use your preferred IDE**
+You can work locally using your preferred IDE. Changes will be synchronized with both GitHub and Lovable.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Installment tracking
+- Calendar view
+- Analytics dashboard
+- User profile management
+- Mobile-optimized UI
+- Offline support
+- Push notifications
+- Secure authentication
 
 Follow these steps:
 
